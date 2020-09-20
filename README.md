@@ -22,6 +22,9 @@
   - 原文 : https://golang.org/cmd/go/
   - 日訳 : https://godoc.org/github.com/gophersjp/go/src/cmd/go
 
+- 文法
+  - 原文 : https://golang.org/ref/spec
+
 ### **Gin**について
 
 - GitHub : https://github.com/gin-gonic/gin
