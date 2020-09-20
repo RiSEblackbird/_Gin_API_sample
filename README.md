@@ -19,6 +19,11 @@
 
 ## 工程(参考先より適宜変更)
 
+### パッケージ管理
+
+- [GOMODULE--Goのパッケージ管理 - Qiita](https://qiita.com/Syoitu/items/f221b52231703cebe8ff)
+- ``$ go mod init _Gin_API_Sample``
+
 ### 初期設定
 
 - 
