@@ -59,6 +59,10 @@
   - CRUD操作の関数を定義
     - ``BookAdd()``, ``BookList()``, ``BookUpdate()``, ``BookDelete()``
 
+- ``middleware/bookMiddleware.go``
+  - ``zap``パッケージを使用したリクエストのロギング
+    - ``RecordUaAndTime()``
+
 ## Tips
 
 ### import文について
@@ -75,6 +79,11 @@
 - [Pointers - A Tour of Go](https://go-tour-jp.appspot.com/moretypes/1)
 - [Go's Declaration Syntax - The Go Blog](https://blog.golang.org/declaration-syntax)
 - [Goで学ぶポインタとアドレス - Qiita](https://qiita.com/Sekky0905/items/447efa04a95e3fec217f)
+
+### ``go.mod``内の``indirect``コメント
+
+- [Using Go Modules - The Go Blog](https://blog.golang.org/using-go-modules)
+  - ある依存関係がそのモジュールによって直接使用されるのではなく、他のモジュールの依存関係によって間接的にのみ使用されることを示す
 
 ## 階層
 
