@@ -55,6 +55,10 @@
   - 各パッケージのインポート
   - デフォルトのミドルウェアでginルーターを作成する
 
+- ``controller/book.go``
+  - CRUD操作の関数を定義
+    - ``BookAdd()``, ``BookList()``, ``BookUpdate()``, ``BookDelete()``
+
 ## Tips
 
 ### import文について
@@ -65,6 +69,12 @@
         ~~~go
         import _ "lib/math"
         ~~~
+
+### ポインタ関連
+
+- [Pointers - A Tour of Go](https://go-tour-jp.appspot.com/moretypes/1)
+- [Go's Declaration Syntax - The Go Blog](https://blog.golang.org/declaration-syntax)
+- [Goで学ぶポインタとアドレス - Qiita](https://qiita.com/Sekky0905/items/447efa04a95e3fec217f)
 
 ## 階層
 
