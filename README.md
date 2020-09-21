@@ -44,7 +44,10 @@
 - ``$ go get xorm.io/xorm``
   - **xorm / xorm** : https://gitea.com/xorm/xorm
   - [旧] go-xorm/xorm : https://github.com/go-xorm/xorm
+    - Go向けのORMツール
 - ``$ go get go.uber.org/zap``
+  - **uber-go/zap** : https://github.com/uber-go/zap
+    - 高速で動作するロギングツール
 
 ### 初期設定
 
