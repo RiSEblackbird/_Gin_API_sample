@@ -36,9 +36,15 @@
 - [GOMODULE--Goのパッケージ管理 - Qiita](https://qiita.com/Syoitu/items/f221b52231703cebe8ff)
 - ``$ go mod init _Gin_API_Sample``
 
-### Ginパッケージ導入
+### パッケージ導入
 
 - ``$ go get -u github.com/gin-gonic/gin``
+- ``$ go get github.com/go-sql-driver/mysql``
+  - **go-sql-driver/mysql** : https://github.com/go-sql-driver/mysql
+- ``$ go get xorm.io/xorm``
+  - **xorm / xorm** : https://gitea.com/xorm/xorm
+  - [旧] go-xorm/xorm : https://github.com/go-xorm/xorm
+- ``$ go get go.uber.org/zap``
 
 ### 初期設定
 
@@ -48,7 +54,7 @@
 
 ~~~txt
 _Gin_API_Sample
-│
+├── 
 ├── 
 │   │   ├── 
 │   │   ├── 
@@ -57,9 +63,10 @@ _Gin_API_Sample
 │   └── 
 │
 ├── .gitignore               // standard gitignore file
-├── README.md                // simple readme file
-├── 
-└── 
+├── go.mod
+├── go.sum
+├── main.go
+└── README.md                // simple readme file
 ~~~
 
 ## Error
