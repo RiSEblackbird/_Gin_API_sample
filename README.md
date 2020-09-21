@@ -54,19 +54,13 @@
 
 ~~~txt
 _Gin_API_Sample
-├── 
-├── 
-│   │   ├── 
-│   │   ├── 
-│   │   └── 
-│   ├── 
-│   └── 
-│
 ├── .gitignore               // standard gitignore file
 ├── go.mod
 ├── go.sum
 ├── main.go
 └── README.md                // simple readme file
+
+### ├── │ └─
 ~~~
 
 ## Error
