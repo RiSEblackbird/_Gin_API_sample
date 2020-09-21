@@ -71,8 +71,10 @@
 - ``model/book.go``
   - ``xorm``の書式でbookの構造体を定義
 
-- ``service/book.go``
+- ``service/init.go``
   - データベースへの接続とテーブルの初期化
+
+- ``service/book.go``
 
 ## Tips
 
