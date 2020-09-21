@@ -95,13 +95,17 @@
 
 ~~~txt
 _Gin_API_Sample
+├── controller
+│   └── book.go
+├── middleware
+│   └── bookMiddleware.go
 ├── .gitignore               // standard gitignore file
 ├── go.mod
 ├── go.sum
 ├── main.go
 └── README.md                // simple readme file
 
-### ├── │ └─
+### ├── │ └──
 ~~~
 
 ## Error
