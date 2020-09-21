@@ -22,7 +22,7 @@
   - 原文 : https://golang.org/cmd/go/
   - 日訳 : https://godoc.org/github.com/gophersjp/go/src/cmd/go
 
-- 文法
+- 文法 (The Go Programming Language Specification)
   - 原文 : https://golang.org/ref/spec
 
 ### **Gin**について
@@ -49,9 +49,22 @@
   - **uber-go/zap** : https://github.com/uber-go/zap
     - 高速で動作するロギングツール
 
-### 初期設定
+### APIの作成([ginを最速でマスターしよう - Qiita](https://qiita.com/Syoitu/items/8e7e3215fb7ac9dabc3a#gin%E3%81%A7%E7%B0%A1%E5%8D%98%E3%81%AArest%E9%A2%A8%E3%81%AEapi%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86))
 
-- 
+- ``main.go``
+  - 各パッケージのインポート
+  - デフォルトのミドルウェアでginルーターを作成する
+
+## Tips
+
+### import文について
+
+ - Import declarations : https://golang.org/ref/spec#Import_declarations
+   - "_"(unserscore)
+      - パッケージの副作用 (初期化) のみを目的としてインポートする場合に空白識別子を前方に付して記述する
+        ~~~go
+        import _ "lib/math"
+        ~~~
 
 ## 階層
 
