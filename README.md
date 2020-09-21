@@ -68,6 +68,9 @@
   - ``zap``パッケージを使用したリクエストのロギング
     - ``RecordUaAndTime()``
 
+- ``model/book.go``
+  - ``xorm``の書式でbookの構造体を定義
+
 ## Tips
 
 ### import文について
@@ -90,6 +93,15 @@
 
 - [Using Go Modules - The Go Blog](https://blog.golang.org/using-go-modules)
   - ある依存関係がそのモジュールによって直接使用されるのではなく、他のモジュールの依存関係によって間接的にのみ使用されることを示す
+
+### 型(types)
+
+- [Types - The Go Programming Language Specification](https://golang.org/ref/spec#Types)
+  - [#Struct types](https://golang.org/ref/spec#Struct_types)
+
+### 構造体(struct)
+
+- [Goを学びたての人が誤解しがちなtypeと構造体について #golang - Qiita](https://qiita.com/tenntenn/items/45c568d43e950292bc31)
 
 ## 階層
 
