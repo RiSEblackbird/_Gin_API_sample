@@ -52,14 +52,19 @@
 ### APIの作成([ginを最速でマスターしよう - Qiita](https://qiita.com/Syoitu/items/8e7e3215fb7ac9dabc3a#gin%E3%81%A7%E7%B0%A1%E5%8D%98%E3%81%AArest%E9%A2%A8%E3%81%AEapi%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86))
 
 - ``main.go``
-  - 各パッケージのインポート
+  - インポート
+    - ``"_Gin_API_Sample/controller"``, ``"_Gin_API_Sample/middleware"``, ``"github.com/gin-gonic/gin"``, ``_ "github.com/go-sql-driver/mysql"``
   - デフォルトのミドルウェアでginルーターを作成する
 
 - ``controller/book.go``
+  - インポート
+    - ``"_Gin_API_Sample/model"``, ``"_Gin_API_Sample/service"``, ``"net/http"``, ``"strconv"``, ``"github.com/gin-gonic/gin"``
   - CRUD操作の関数を定義
     - ``BookAdd()``, ``BookList()``, ``BookUpdate()``, ``BookDelete()``
 
 - ``middleware/bookMiddleware.go``
+  - インポート
+    - ``"log"``, ``"time"``, ``"github.com/gin-gonic/gin"``, ``"go.uber.org/zap"``
   - ``zap``パッケージを使用したリクエストのロギング
     - ``RecordUaAndTime()``
 
@@ -67,12 +72,13 @@
 
 ### import文について
 
- - Import declarations : https://golang.org/ref/spec#Import_declarations
-   - "_"(unserscore)
-      - パッケージの副作用 (初期化) のみを目的としてインポートする場合に空白識別子を前方に付して記述する
-        ~~~go
-        import _ "lib/math"
-        ~~~
+- Import declarations : https://golang.org/ref/spec#Import_declarations
+  - "_"(unserscore)
+    - パッケージの副作用 (初期化) のみを目的としてインポートする場合に空白識別子を前方に付して記述する
+
+      ~~~go
+      import _ "lib/math"
+      ~~~
 
 ### ポインタ関連
 
