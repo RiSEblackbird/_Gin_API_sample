@@ -75,6 +75,7 @@
   - データベースへの接続とテーブルの初期化
 
 - ``service/book.go``
+  - CRUD処理の結果を返す
 
 ## Tips
 
@@ -127,11 +128,21 @@ _Gin_API_Sample
 
 ## Error
 
-### ``  ``
+### ``main.go``の実行エラー
 
 ~~~error
+$ go run main.go
+# _Gin_API_Sample/service
+service/book.go:27:20: DbEngine.Id undefined (type *xorm.Engine has no field or method Id, but does have ID)
+service/book.go:36:20: DbEngine.Id undefined (type *xorm.Engine has no field or method Id, but does have ID)
 ~~~
 
-- ````
 - 要因&対処
-  - 
+  - https://gitea.com/xorm/xorm#notice
+    - v1.0.0にて関数名が``Sql`` -> ``SQL``, ``Id`` -> ``ID``と変更された
+
+~~~error
+$ go run main.go
+2020/09/22 03:24:34 sql: unknown driver "mysql" (forgotten import?)
+exit status 1
+~~~
