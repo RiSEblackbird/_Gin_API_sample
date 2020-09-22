@@ -12,8 +12,8 @@ import (
 var DbEngine *xorm.Engine
 
 func init() {
-	driverName := "mysql"
-	DsName := "root:root@(192.168.99.100:3306)/gin?charset=utf8"
+	driverName := "postgres"
+	DsName := "user=gintutorial host=localhost port=5432 dbname=ginxorm sslmode=disable"
 	err := errors.New("")
 	// 新しくDBのエンジンを定義
 	DbEngine, err = xorm.NewEngine(driverName, DsName)

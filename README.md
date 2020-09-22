@@ -5,6 +5,8 @@
 
 ## リポジトリの目的
 
+- スケジュールの都合で停止中
+
 - ``Gin``の基礎学習
   - とりあえず組んで動かす
 - 学習記録/自分用資料まとめ
@@ -77,9 +79,12 @@
 - ``service/book.go``
   - CRUD処理の結果を返す
 
-### ※一時メモ 
+### ※一時メモ
 
 - ``$ go get github.com/lib/pq``
+  - mysqlドライバーから書き換えて使用(同じく "_"付きのインポート)
+
+### ＜＜　スケジュールの問題で一時停止　＞＞
 
 ## Tips
 
@@ -148,5 +153,11 @@ service/book.go:36:20: DbEngine.Id undefined (type *xorm.Engine has no field or 
 ~~~error
 $ go run main.go
 2020/09/22 03:24:34 sql: unknown driver "mysql" (forgotten import?)
+exit status 1
+~~~
+
+~~~error
+$ go run main.go
+2020/09/22 22:30:01 sql: unknown driver "postgres" (forgotten import?)
 exit status 1
 ~~~
