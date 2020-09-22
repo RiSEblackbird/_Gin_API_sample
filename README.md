@@ -77,6 +77,10 @@
 - ``service/book.go``
   - CRUD処理の結果を返す
 
+### ※一時メモ 
+
+- ``$ go get github.com/lib/pq``
+
 ## Tips
 
 ### import文について
