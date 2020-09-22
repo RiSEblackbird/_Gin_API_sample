@@ -6,14 +6,15 @@ import (
 	"fmt"
 	"log"
 
+	_ "github.com/go-sql-driver/mysql"
 	"xorm.io/xorm"
 )
 
 var DbEngine *xorm.Engine
 
 func init() {
-	driverName := "postgres"
-	DsName := "user=gintutorial host=localhost port=5432 dbname=ginxorm sslmode=disable"
+	driverName := "mysql"
+	DsName := "gintutorial:password@/ginsample"
 	err := errors.New("")
 	// 新しくDBのエンジンを定義
 	DbEngine, err = xorm.NewEngine(driverName, DsName)
