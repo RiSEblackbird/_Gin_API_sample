@@ -150,7 +150,7 @@ _Gin_API_Sample
 
 ## Error
 
-### ``main.go``の実行エラー
+### DbEngineのメソッド名誤り (CLEAR!)
 
 ~~~error
 $ go run main.go
@@ -163,14 +163,34 @@ service/book.go:36:20: DbEngine.Id undefined (type *xorm.Engine has no field or 
   - https://gitea.com/xorm/xorm#notice
     - v1.0.0にて関数名が``Sql`` -> ``SQL``, ``Id`` -> ``ID``と変更された
 
+### "mysql"ドライバーが見つからない (CLEAR!)
+
 ~~~error
 $ go run main.go
 2020/09/22 03:24:34 sql: unknown driver "mysql" (forgotten import?)
 exit status 1
 ~~~
 
-~~~error
-$ go run main.go
-2020/09/22 22:30:01 sql: unknown driver "postgres" (forgotten import?)
-exit status 1
-~~~
+- 要因&対処
+  - ドライバーが見つからないのは、DBと接続するファイルでインポートしていないからではないかと疑った。
+    - import ``_ "github.com/go-sql-driver/mysql"``
+      - 記述するファイルを変更 : ``main.go`` -> ``service/init.go``
+
+        ~~~sql
+        結果を再掲
+        $ go run main.go
+        [xorm] [info]  2020/09/23 03:28:06.630740 [SQL] SELECT `TABLE_NAME`, `ENGINE`, `AUTO_INCREMENT`, `TABLE_COMMENT` from `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_SCHEMA`=? AND (`ENGINE`='MyISAM' OR `ENGINE` = 'InnoDB' OR `ENGINE` = 'TokuDB') [ginsample] - 10.169646ms
+        [xorm] [info]  2020/09/23 03:28:06.711421 [SQL] CREATE TABLE IF NOT EXISTS `book` (`id` INT(64) PRIMARY KEY AUTO_INCREMENT NOT NULL, `title` VARCHAR(40) NULL, `content` VARCHAR(40) NULL) [] - 80.320139ms
+        init data base ok
+        [GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+        [GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+        - using env:   export GIN_MODE=release
+        - using code:  gin.SetMode(gin.ReleaseMode)
+
+        [GIN-debug] POST   /book/v1/add              --> _Gin_API_Sample/controller.BookAdd (4 handlers)
+        [GIN-debug] GET    /book/v1/list             --> _Gin_API_Sample/controller.BookList (4 handlers)
+        [GIN-debug] PUT    /book/v1/update           --> _Gin_API_Sample/controller.BookUpdate (4 handlers)
+        [GIN-debug] DELETE /book/v1/delete           --> _Gin_API_Sample/controller.BookDelete (4 handlers)
+        [GIN-debug] Listening and serving HTTP on :3000
+        ~~~
