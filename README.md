@@ -5,8 +5,6 @@
 
 ## リポジトリの目的
 
-- スケジュールの都合で停止中
-
 - ``Gin``の基礎学習
   - とりあえず組んで動かす
 - 学習記録/自分用資料まとめ
@@ -54,18 +52,18 @@
 ### APIの作成([ginを最速でマスターしよう - Qiita](https://qiita.com/Syoitu/items/8e7e3215fb7ac9dabc3a#gin%E3%81%A7%E7%B0%A1%E5%8D%98%E3%81%AArest%E9%A2%A8%E3%81%AEapi%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86))
 
 - ``main.go``
-  - インポート
-    - ``"_Gin_API_Sample/controller"``, ``"_Gin_API_Sample/middleware"``, ``"github.com/gin-gonic/gin"``, ``_ "github.com/go-sql-driver/mysql"``
+  - import
+    - ``"_Gin_API_Sample/controller"``, ``"_Gin_API_Sample/middleware"``, ``"github.com/gin-gonic/gin"``
   - デフォルトのミドルウェアでginルーターを作成する
 
 - ``controller/book.go``
-  - インポート
+  - import
     - ``"_Gin_API_Sample/model"``, ``"_Gin_API_Sample/service"``, ``"net/http"``, ``"strconv"``, ``"github.com/gin-gonic/gin"``
   - CRUD操作の関数を定義
     - ``BookAdd()``, ``BookList()``, ``BookUpdate()``, ``BookDelete()``
 
 - ``middleware/bookMiddleware.go``
-  - インポート
+  - import
     - ``"log"``, ``"time"``, ``"github.com/gin-gonic/gin"``, ``"go.uber.org/zap"``
   - ``zap``パッケージを使用したリクエストのロギング
     - ``RecordUaAndTime()``
@@ -74,17 +72,32 @@
   - ``xorm``の書式でbookの構造体を定義
 
 - ``service/init.go``
+  - import
+    - ``"_Gin_API_Sample/model"``, ``"errors"``, ``"fmt"``, ``"log"``, ``_ "github.com/go-sql-driver/mysql"``, ``"xorm.io/xorm"``
   - データベースへの接続とテーブルの初期化
 
 - ``service/book.go``
+  - import
+    - ``"_Gin_API_Sample/model"``
   - CRUD処理の結果を返す
 
-### ※一時メモ
+~~~sql
+$ go run main.go
+[xorm] [info]  2020/09/23 03:28:06.630740 [SQL] SELECT `TABLE_NAME`, `ENGINE`, `AUTO_INCREMENT`, `TABLE_COMMENT` from `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_SCHEMA`=? AND (`ENGINE`='MyISAM' OR `ENGINE` = 'InnoDB' OR `ENGINE` = 'TokuDB') [ginsample] - 10.169646ms
+[xorm] [info]  2020/09/23 03:28:06.711421 [SQL] CREATE TABLE IF NOT EXISTS `book` (`id` INT(64) PRIMARY KEY AUTO_INCREMENT NOT NULL, `title` VARCHAR(40) NULL, `content` VARCHAR(40) NULL) [] - 80.320139ms
+init data base ok
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
 
-- ``$ go get github.com/lib/pq``
-  - mysqlドライバーから書き換えて使用(同じく "_"付きのインポート)
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:   export GIN_MODE=release
+ - using code:  gin.SetMode(gin.ReleaseMode)
 
-### ＜＜　スケジュールの問題で一時停止　＞＞
+[GIN-debug] POST   /book/v1/add              --> _Gin_API_Sample/controller.BookAdd (4 handlers)
+[GIN-debug] GET    /book/v1/list             --> _Gin_API_Sample/controller.BookList (4 handlers)
+[GIN-debug] PUT    /book/v1/update           --> _Gin_API_Sample/controller.BookUpdate (4 handlers)
+[GIN-debug] DELETE /book/v1/delete           --> _Gin_API_Sample/controller.BookDelete (4 handlers)
+[GIN-debug] Listening and serving HTTP on :3000
+~~~
 
 ## Tips
 
