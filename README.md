@@ -5,6 +5,8 @@
 
 ## リポジトリの目的
 
+- スケジュールの都合で停止中
+
 - ``Gin``の基礎学習
   - とりあえず組んで動かす
 - 学習記録/自分用資料まとめ
@@ -22,7 +24,7 @@
   - 原文 : https://golang.org/cmd/go/
   - 日訳 : https://godoc.org/github.com/gophersjp/go/src/cmd/go
 
-- 文法
+- 文法 (The Go Programming Language Specification)
   - 原文 : https://golang.org/ref/spec
 
 ### **Gin**について
@@ -49,30 +51,113 @@
   - **uber-go/zap** : https://github.com/uber-go/zap
     - 高速で動作するロギングツール
 
-### 初期設定
+### APIの作成([ginを最速でマスターしよう - Qiita](https://qiita.com/Syoitu/items/8e7e3215fb7ac9dabc3a#gin%E3%81%A7%E7%B0%A1%E5%8D%98%E3%81%AArest%E9%A2%A8%E3%81%AEapi%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86))
 
-- 
+- ``main.go``
+  - インポート
+    - ``"_Gin_API_Sample/controller"``, ``"_Gin_API_Sample/middleware"``, ``"github.com/gin-gonic/gin"``, ``_ "github.com/go-sql-driver/mysql"``
+  - デフォルトのミドルウェアでginルーターを作成する
+
+- ``controller/book.go``
+  - インポート
+    - ``"_Gin_API_Sample/model"``, ``"_Gin_API_Sample/service"``, ``"net/http"``, ``"strconv"``, ``"github.com/gin-gonic/gin"``
+  - CRUD操作の関数を定義
+    - ``BookAdd()``, ``BookList()``, ``BookUpdate()``, ``BookDelete()``
+
+- ``middleware/bookMiddleware.go``
+  - インポート
+    - ``"log"``, ``"time"``, ``"github.com/gin-gonic/gin"``, ``"go.uber.org/zap"``
+  - ``zap``パッケージを使用したリクエストのロギング
+    - ``RecordUaAndTime()``
+
+- ``model/book.go``
+  - ``xorm``の書式でbookの構造体を定義
+
+- ``service/init.go``
+  - データベースへの接続とテーブルの初期化
+
+- ``service/book.go``
+  - CRUD処理の結果を返す
+
+### ※一時メモ
+
+- ``$ go get github.com/lib/pq``
+  - mysqlドライバーから書き換えて使用(同じく "_"付きのインポート)
+
+### ＜＜　スケジュールの問題で一時停止　＞＞
+
+## Tips
+
+### import文について
+
+- Import declarations : https://golang.org/ref/spec#Import_declarations
+  - "_"(unserscore)
+    - パッケージの副作用 (初期化) のみを目的としてインポートする場合に空白識別子を前方に付して記述する
+
+      ~~~go
+      import _ "lib/math"
+      ~~~
+
+### ポインタ関連
+
+- [Pointers - A Tour of Go](https://go-tour-jp.appspot.com/moretypes/1)
+- [Go's Declaration Syntax - The Go Blog](https://blog.golang.org/declaration-syntax)
+- [Goで学ぶポインタとアドレス - Qiita](https://qiita.com/Sekky0905/items/447efa04a95e3fec217f)
+
+### ``go.mod``内の``indirect``コメント
+
+- [Using Go Modules - The Go Blog](https://blog.golang.org/using-go-modules)
+  - ある依存関係がそのモジュールによって直接使用されるのではなく、他のモジュールの依存関係によって間接的にのみ使用されることを示す
+
+### 型(types)
+
+- [Types - The Go Programming Language Specification](https://golang.org/ref/spec#Types)
+  - [#Struct types](https://golang.org/ref/spec#Struct_types)
+
+### 構造体(struct)
+
+- [Goを学びたての人が誤解しがちなtypeと構造体について #golang - Qiita](https://qiita.com/tenntenn/items/45c568d43e950292bc31)
 
 ## 階層
 
 ~~~txt
 _Gin_API_Sample
+├── controller
+│   └── book.go
+├── middleware
+│   └── bookMiddleware.go
 ├── .gitignore               // standard gitignore file
 ├── go.mod
 ├── go.sum
 ├── main.go
 └── README.md                // simple readme file
 
-### ├── │ └─
+### ├── │ └──
 ~~~
 
 ## Error
 
-### ``  ``
+### ``main.go``の実行エラー
 
 ~~~error
+$ go run main.go
+# _Gin_API_Sample/service
+service/book.go:27:20: DbEngine.Id undefined (type *xorm.Engine has no field or method Id, but does have ID)
+service/book.go:36:20: DbEngine.Id undefined (type *xorm.Engine has no field or method Id, but does have ID)
 ~~~
 
-- ````
 - 要因&対処
-  - 
+  - https://gitea.com/xorm/xorm#notice
+    - v1.0.0にて関数名が``Sql`` -> ``SQL``, ``Id`` -> ``ID``と変更された
+
+~~~error
+$ go run main.go
+2020/09/22 03:24:34 sql: unknown driver "mysql" (forgotten import?)
+exit status 1
+~~~
+
+~~~error
+$ go run main.go
+2020/09/22 22:30:01 sql: unknown driver "postgres" (forgotten import?)
+exit status 1
+~~~
